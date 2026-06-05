@@ -1,0 +1,153 @@
+{
+    "description": "Nulea M512: button chords + scroll layer\nChords:\n- m1+m4 -> Cmd+Ctrl + Button1 (click/drag)\n- m1+m2+m4 -> Cmd+Tab\n- m1+m2+m3 -> Ctrl+Up\n- m3+m4 -> Button5 (Forward)\n- m2+m4 -> Cmd+A\n- m2+m3 -> Cmd+C\n- m2+m1 -> Cmd+V\n- m3+m1 -> Enter\nScroll:\n- Hold m4 (>=250ms) + move trackball -> scroll",
+    "manipulators": [
+        {
+            "from": {
+                "simultaneous": [
+                    { "pointing_button": "button1" },
+                    { "pointing_button": "button4" }
+                ]
+            },
+            "to": [
+                {
+                    "modifiers": ["command", "control"],
+                    "pointing_button": "button1"
+                }
+            ],
+            "to_after_key_up": [
+                { "key_code": "left_control" },
+                { "key_code": "vk_none" },
+                { "key_code": "left_command" },
+                { "key_code": "vk_none" }
+            ],
+            "type": "basic"
+        },
+        {
+            "from": {
+                "simultaneous": [
+                    { "pointing_button": "button1" },
+                    { "pointing_button": "button2" },
+                    { "pointing_button": "button4" }
+                ]
+            },
+            "to": [
+                {
+                    "key_code": "tab",
+                    "modifiers": ["command"]
+                }
+            ],
+            "type": "basic"
+        },
+        {
+            "from": {
+                "simultaneous": [
+                    { "pointing_button": "button1" },
+                    { "pointing_button": "button2" },
+                    { "pointing_button": "button3" }
+                ]
+            },
+            "to": [
+                { "apple_vendor_keyboard_key_code": "mission_control" },
+                { "key_code": "vk_none" }
+            ],
+            "type": "basic"
+        },
+        {
+            "from": {
+                "simultaneous": [
+                    { "pointing_button": "button3" },
+                    { "pointing_button": "button4" }
+                ]
+            },
+            "to": [{ "pointing_button": "button5" }],
+            "type": "basic"
+        },
+        {
+            "from": {
+                "simultaneous": [
+                    { "pointing_button": "button2" },
+                    { "pointing_button": "button4" }
+                ]
+            },
+            "to": [
+                {
+                    "key_code": "a",
+                    "modifiers": ["command"]
+                }
+            ],
+            "type": "basic"
+        },
+        {
+            "from": {
+                "simultaneous": [
+                    { "pointing_button": "button2" },
+                    { "pointing_button": "button3" }
+                ]
+            },
+            "to": [
+                {
+                    "key_code": "c",
+                    "modifiers": ["command"]
+                }
+            ],
+            "type": "basic"
+        },
+        {
+            "from": {
+                "simultaneous": [
+                    { "pointing_button": "button2" },
+                    { "pointing_button": "button1" }
+                ]
+            },
+            "to": [
+                {
+                    "key_code": "v",
+                    "modifiers": ["command"]
+                }
+            ],
+            "type": "basic"
+        },
+        {
+            "from": {
+                "simultaneous": [
+                    { "pointing_button": "button3" },
+                    { "pointing_button": "button1" }
+                ]
+            },
+            "to": [{ "key_code": "return_or_enter" }],
+            "type": "basic"
+        },
+        {
+            "from": { "pointing_button": "button4" },
+            "parameters": {
+                "basic.to_if_alone_timeout_milliseconds": 250,
+                "basic.to_if_held_down_threshold_milliseconds": 250
+            },
+            "to_if_alone": [{ "pointing_button": "button4" }],
+            "to_if_held_down": [
+                {
+                    "set_variable": {
+                        "key_up_value": false,
+                        "name": "enable_mouse_motion_to_scroll",
+                        "value": true
+                    }
+                }
+            ],
+            "type": "basic"
+        },
+        {
+            "conditions": [
+                {
+                    "name": "enable_mouse_motion_to_scroll",
+                    "type": "variable_if",
+                    "value": true
+                }
+            ],
+            "options": {
+                "momentum_scroll_enabled": true,
+                "speed_multiplier": 1.0
+            },
+            "type": "mouse_motion_to_scroll"
+        }
+    ]
+}
